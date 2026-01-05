@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+    int n = nums.size();
+    int count = 0;
+    unordered_set<int>st(nums.begin(),nums.end());
+    for(int i:st){
+        count++;
+    }
+    if(n==count){
+        return false;
+    }
+    return true;
+    }
+};
