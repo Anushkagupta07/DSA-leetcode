@@ -1,1 +1,24 @@
+void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n) {
+ int i =m-1;
+ int j = n-1;
+ int k = m+n-1;
+ while(i>=0 && j>=0){
+    if(nums1[i]>=nums2[j]){
+        nums1[k]=nums1[i];
+        i--;
+    }else{
+        nums1[k]=nums2[j];
+        j--;
+    }
+    k--;
+ }   
+ while(j>=0){ //no need to check for i>0 beacuse if all the elements of j has traversed and sorted accordingly then elements of i will be at their correct place obv beacuse in question it has given both the arrays are individually sorted.
+    nums1[k]=nums2[j];
+    k--;
+    j--;
+ }
+}
+//As we know , 0 lies at the end of the array nums1...so rather than moving forward, we can start traversing from the end of both the arrays
 
+//time complexity = O(m+n)
+//space complexity = O(1)
