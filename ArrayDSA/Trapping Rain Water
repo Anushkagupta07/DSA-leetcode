@@ -1,5 +1,6 @@
 class Solution {
 public:
+//OPTIMAL APPROACH - O(n)
     int trap(vector<int>& height) {
         int n = height.size();
         int ans =0;
