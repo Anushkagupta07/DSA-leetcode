@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int findInMountainArray(int target, MountainArray &mountainArr) {
+        int peak = findPeak(mountainArr);
+        int left = BinarySearchAsc(mountainArr, target, 0, peak);
+        if(left!=-1) return left;
+        return BinarySearchDesc(mountainArr, target, peak+1 , mountainArr.length()-1);
+    }
+     int findPeak(MountainArray &mountainArr){
+        int s = 0;
+        int e = mountainArr.length()-1;
+        while(s<e){
+            int mid = s+(e-s)/2;
+            if(mountainArr.get(mid) < mountainArr.get(mid+1)){
+                s = mid+1;
+            }else{
+                e = mid;
+            }
+        }
+        return s;
+     }  
+     int BinarySearchAsc(MountainArray &mountainArr , int target, int s , int e){
+        while(s<=e){
+        int mid = s+(e-s)/2;
+        if(mountainArr.get(mid)==target){
+            return mid;
+        }else if(mountainArr.get(mid) < target){
+            s = mid+1;
+        }else{
+            e = mid-1;
+        }
+        }
+        return -1;
+     } 
+     int BinarySearchDesc(MountainArray &mountainArr , int target, int s , int e){
+        while(s<=e){
+        int mid = s+(e-s)/2;
+        if(mountainArr.get(mid)==target){
+            return mid;
+        }else if(mountainArr.get(mid) > target){
+            s = mid+1;
+        }else{
+            e = mid-1;
+        }
+        }
+        return -1;
+    }
+};
