@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int getCommon(vector<int>& nums1, vector<int>& nums2) {
+    int n1 = nums1.size();
+    int n2 = nums2.size();   
+    
+    //APPROACH 1 - using set
+    unordered_set<int>s(nums1.begin(),nums1.end());
+    for(int num : nums2){
+        if(s.find(num)!= s.end()){
+            return num;
+        }
+    }
+    return -1;
+    //t.c. = O(n+m)
+    //s.c. = O(n)
+
+
+
+    //APPROACH 2 - two pointers
+    // int i=0, j=0;
+    // while(i<n1 && j<n2){
+    //     if(nums1[i]==nums2[j]){
+    //         return nums1[i];
+    //         break;
+    //     }
+    //     if(nums2[j] > nums1[i]) i++;
+    //     else if(nums2[j] < nums1[i]) j++;
+    // }
+    // return -1;
+    }
+};
+//t.c. = O(n+m)
+//s.c. = O(1)
