@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool dfs(int source, int destination, unordered_map<int, vector<int>>&list, vector<int>&visited){
+        if(source == destination) return true;
+        visited[source] = 1;  
+        for(auto nbr : list[source]){
+            if(!visited[nbr]){
+                if(dfs(nbr , destination, list, visited))
+                return true;
+            }
+        }
+        return false;
+    }
+    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+    unordered_map<int, vector<int>>list;
+    for(int i=0;i<edges.size();i++){
+        int a = edges[i][0];
+        int b = edges[i][1];
+        list[a].push_back(b);
+        list[b].push_back(a);
+    }  
+    vector<int>visited(n , 0);
+    return dfs(source, destination, list, visited);
+    }
+};
+//t.c. = O(V+E)
+//s.c. = O(V+E)
