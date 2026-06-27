@@ -1,0 +1,36 @@
+class Solution {
+  public:
+    int rowWithMax1s(vector<vector<int>> &arr) {
+         int m = arr.size();
+         int n = arr[0].size();
+         int maxOnes = 0;
+         int ans = -1;
+         for(int row = 0; row<m ; row++){
+             int i=0;
+             int j = n-1;
+             if(arr[row][i]==1 && arr[row][j]==1){
+                 if(n > maxOnes){
+                     maxOnes = n;
+                     ans = row;
+                 }
+             }else if(arr[row][i]==0 && arr[row][j]==0){
+                 continue;
+             }else{
+                 while(i<=j){
+                     int mid = i+ (j-i)/2;
+                     if(arr[row][mid]==0){
+                         i = mid+1;
+                     }else{
+                         j = mid-1;
+                     }
+                 }
+             }
+             int ones = n-i;
+                    if(ones > maxOnes){
+                        maxOnes = ones;
+                        ans = row;
+                    }
+         }
+         return ans;
+    }
+};
