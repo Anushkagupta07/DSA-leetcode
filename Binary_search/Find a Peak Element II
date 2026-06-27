@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<int> findPeakGrid(vector<vector<int>>& mat) {
+    int m = mat.size(); //rows
+    int n = mat[0].size(); //columns
+    int s = 0;
+    int e = n-1;
+    while(s<=e){
+        int maxRow = 0;
+        int midCol = s+(e-s)/2;
+        for(int row = 0; row<m; row++){
+            if(mat[row][midCol] > mat[maxRow][midCol]){
+                maxRow = row;
+            }
+        }
+        int current = mat[maxRow][midCol];
+        int left;
+        if(midCol==0) left = -1;
+        else left = mat[maxRow][midCol-1];
+        int right;
+        if(midCol==n-1) right = -1;
+        else right = mat[maxRow][midCol+1];
+        if(current > left && current > right){
+            return {maxRow , midCol};
+        }
+        else if(left > current){
+            e = midCol-1;
+        }else{
+            s = midCol + 1;
+        }
+    } 
+    return {-1,-1};
+    }
+};
