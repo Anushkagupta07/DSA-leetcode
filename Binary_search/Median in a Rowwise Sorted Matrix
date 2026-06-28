@@ -1,0 +1,47 @@
+class Solution {
+  public:
+    int upperBound(vector<int>&arr, int x, int n){
+        int s =0;
+        int e = n-1;
+        int ans = n;
+        while(s<=e){
+            int mid = s + (e-s)/2;
+            if(arr[mid] > x){
+                ans = mid;
+                e = mid-1;
+            }else{
+                s = mid + 1;
+            }
+        }
+        return ans;
+    }
+    int countSmallEqual(vector<vector<int>>&mat, int m, int n, int x){
+        int count = 0;
+        for(int i=0;i<m;i++){
+            count+= upperBound(mat[i],x,n);
+        }
+        return count;
+    }
+    int median(vector<vector<int>> &mat) {
+        // code here
+        int s = INT_MAX;
+        int e = INT_MIN;
+        int m = mat.size();
+        int n = mat[0].size();
+        for(int i=0;i<m;i++){
+            s = min(s, mat[i][0]);
+            e = max(e, mat[i][n-1]);
+        }
+        int req = (n*m)/2;
+        while(s<=e){
+            int mid = s + (e-s)/2;
+            int smallEqual = countSmallEqual(mat, m ,n, mid);
+            if(smallEqual <= req){
+                s = mid+1;
+            }else{
+                e = mid-1;
+            }
+        }
+        return s;
+    }
+};
