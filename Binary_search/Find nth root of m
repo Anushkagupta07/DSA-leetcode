@@ -1,0 +1,33 @@
+class Solution {
+  public:
+    int power(int mid , int n , int m){
+        long long ans = 1;
+        for(int i=1;i<=n;i++){
+            ans*=mid;
+            if(ans > m){
+                return 2;
+            }
+            }if(ans == m){
+                return 1;
+            }else{
+                return 0;
+            }
+    }
+    int nthRoot(int n, int m) {
+        // Code here
+        int s = 0;
+        int e = m;
+        while(s<=e){
+            int mid = s + (e-s)/2;
+            int check = power(mid , n , m);
+            if(check == 1){
+                return mid;
+            }else if(check ==0){
+                s = mid+1;
+            }else{
+                e = mid-1;
+            }
+        }
+        return -1;
+    }
+};
