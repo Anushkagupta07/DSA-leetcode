@@ -1,0 +1,39 @@
+class Solution {
+public:
+    bool isValid(vector<int>&nums, int n, int k, int mid){
+        int student = 1;
+        int sum = 0;
+        for(int i=0;i<n;i++){
+            sum = sum+ nums[i];
+            if( sum > mid){
+                student++;
+                sum = nums[i];
+            }
+            if(student > k){
+                return false;
+            }
+        }
+        return true;
+    }
+    int splitArray(vector<int>& nums, int k) {
+        int n = nums.size();
+     int s = *max_element(nums.begin(),nums.end());
+     int total_sum = 0;
+     for(int i=0;i<n;i++){
+        total_sum+= nums[i];
+     } 
+     int e = total_sum;
+     int res = -1;
+     if(n < k) return -1;
+     while(s <= e){
+        int mid = s + (e-s)/2;
+        if(isValid(nums, n, k, mid) == true){
+            res = mid;
+            e = mid-1;
+        }else{
+            s = mid +1;
+        }
+     }  
+     return res;
+    }
+};
