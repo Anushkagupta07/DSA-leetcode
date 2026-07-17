@@ -1,0 +1,33 @@
+class Solution {
+  public:
+    vector<int> leftView(Node *root) {
+        // code here
+        vector<int>ans;
+        if(root == NULL){
+            return ans;
+        }
+        queue<Node*>q;
+        q.push(root);
+        while(q.size() > 0){
+            int size = q.size();
+            for(int i=0;i<size;i++){
+                Node* curr = q.front();
+                q.pop();
+                if(i == 0){
+                    ans.push_back(curr->data);
+                }
+                if(curr->left!= NULL){
+                    q.push(curr->left);
+                }
+                if(curr->right!= NULL){
+                    q.push(curr->right);
+                }
+            }
+        }
+        return ans;
+    }
+};
+//t.c. = O(n)
+//s.c. =
+//auxiliary space = O(n)
+//total space = O(2n) = O(n)
