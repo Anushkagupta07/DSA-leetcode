@@ -1,0 +1,12 @@
+class Solution {
+  public:
+    int sumBT(Node* root) {
+        // code here
+        int sum = 0;
+        if(root == NULL) return 0;
+        sum+= root->data;
+        sum+= sumBT(root->left);
+        sum+= sumBT(root->right);
+        return sum;
+    }
+};
