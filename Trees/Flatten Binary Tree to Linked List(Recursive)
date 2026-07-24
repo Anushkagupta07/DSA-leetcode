@@ -12,3 +12,5 @@ public:
      nextRight = root;
     }
 };
+//t.c. = O(n)
+//s.c. = O(h), because of recursive stack
