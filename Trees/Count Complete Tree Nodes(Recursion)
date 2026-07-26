@@ -9,3 +9,5 @@ public:
     return 1 + leftcount + rightcount;
     }
 };
+//t.c. = O(n)
+//s.c. = O(h) where h is height of the binary tree
