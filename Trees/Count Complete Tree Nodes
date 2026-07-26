@@ -1,0 +1,30 @@
+class Solution{
+    public:
+    int LeftHeight(TreeNode* root){
+        int height = 0;
+        while(root){
+            height++;
+            root = root->left;
+        }
+        return height;
+    }
+    int RightHeight(TreeNode* root){
+        int height = 0;
+        while(root){
+            height++;
+            root = root->right;
+        }
+        return height;
+    }
+    int countNodes(TreeNode* root){
+        if(root == NULL) return 0;
+        int lh = LeftHeight(root);
+        int rh = RightHeight(root);
+        if(lh == rh){
+            return (1<<lh) - 1;
+        }
+        return 1 + countNodes(root->left) + countNodes(root->right);
+    }
+};
+//t.c. = O(logn^2) where logn is for height and logn is for traversal.
+//s.c. = O(logn)
