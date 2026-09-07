@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool check(vector<int>& nums) {
+        //HINT->In a sorted and rotated array there will be only one drop where nums[i] > nums[i+1].
+     int n = nums.size();
+     int count = 0;
+     for(int i=0;i<n;i++){
+        if(nums[i] > nums[(i+1) % n]){
+            count++;
+        }
+     }
+     if(count == 1 || count == 0) return true; //count==0 when all the elements of nums are same, so count will not increase
+     else return false;
+    }
+};
+//t.c. = O(n)
+//s.c. = O(1)
