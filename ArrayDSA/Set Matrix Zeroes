@@ -1,1 +1,35 @@
 
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+    //BRUTE FORCE APPROACH
+    //for every element as 0, mark its rows and columns as -1 and then again iterate once again on whole matrix and convert -1 to 0.
+    //t.c. = O(n*m)*O(n+m) + O(n*m), somewhere in the power of cube.
+    //s.c. = O(1)    
+
+
+
+    //BETTER APPROACH
+    int m = matrix.size(); //rows
+    int n = matrix[0].size(); //columns
+    vector<int>col(n, 0);
+    vector<int>row(m, 0);
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            if(matrix[i][j] == 0){
+                row[i] = 1;
+                col[j] = 1;
+            }
+        }
+    }
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            if(row[i] || col[j]){
+                matrix[i][j] = 0;
+            }
+        }
+    }
+    }
+};
+t.c. = O(2*n*m)
+s.c. = O(n) + O(m)
