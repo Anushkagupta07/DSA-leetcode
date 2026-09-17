@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int findMaxLength(vector<int>& nums) {
+    int n = nums.size();
+    int sum = 0;
+    int max_len = INT_MIN;
+    unordered_map<int,int>mp;
+    mp[0] = -1;
+    for(int i=0;i<n;i++){
+        if(nums[i] == 0){
+            sum = sum - 1;
+        }else{
+            sum = sum + 1;
+        }
+        if(mp.find(sum)!= mp.end()){
+        max_len = max(max_len , i- mp[sum]);
+        }else{
+            mp[sum] = i;
+        }
+    }  
+    if(max_len == INT_MIN) return 0;  
+    else return max_len;
+    }
+};
+//If the same prefix sum occurs at two different positions, then the elements between those positions have sum 0.
+//t.c. = O(n)
+//s.c. = O(n)
