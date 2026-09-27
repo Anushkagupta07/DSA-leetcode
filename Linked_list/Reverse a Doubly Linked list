@@ -1,5 +1,8 @@
 struct Node* reverse(struct Node* head) {
     // Code here
+if(head == NULL){
+retrun NULL;
+}
     struct Node* curr = head;
     struct Node* back = NULL;
     while(curr != NULL){
@@ -11,3 +14,5 @@ struct Node* reverse(struct Node* head) {
     }
     return back;
 }
+//t.c. = O(n)
+//s.c. = O(1)
