@@ -14,3 +14,5 @@ stack<pair<int,int>>s;
         return span;
     }
 };
+//t.c. = O(n)
+//s.c. = O(n)
