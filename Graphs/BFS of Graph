@@ -1,0 +1,28 @@
+class Solution {
+  public:
+    vector<int> bfs(vector<vector<int>> &adj) {
+        // code here
+        int V = adj.size();
+        int vis[V] = {0};
+        vis[0] = 1;
+        queue<int>q;
+        q.push(0);
+        vector<int>bfs;
+        while(!q.empty()){ //O(v)
+            int node = q.front();
+            q.pop();
+            bfs.push_back(node);
+            
+            for(auto it : adj[node]){ //O(2E) beacuse for undirected graph, for a particular node, it will visit it neighbours.
+                if(!vis[it]){
+                    vis[it] = 1;
+                    q.push(it);
+                }
+            }
+        }
+        return bfs;
+    }
+};
+//V->no. of vertices
+//t.c. = O(V) + O(2E)
+//s.c. = O(2V) => O(V), queue + vector bfs
