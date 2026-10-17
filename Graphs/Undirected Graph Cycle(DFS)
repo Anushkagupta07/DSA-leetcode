@@ -1,0 +1,40 @@
+class Solution{
+   private:
+   bool dfs(int node , int parent , vector<vector<int>>&adj , vector<int>&vis){
+       vis[node] =1;
+       for(auto adjacentNode : adj[node]){
+           if(!vis[adjacentNode]){
+               if(dfs(adjacentNode , node , adj , vis) == true){
+                   return true;
+               }
+           }else{
+               if(adjacentNode != parent){
+                   return true;
+               }
+           }
+       }
+       return false;
+   }
+
+   public:
+   bool isCycle(int V , vector<vector<int>>&edges){
+       vector<vector<int>>adj(V);
+       for(auto edge : edges){
+           int u = edge[0];
+           int v = edge[1];
+           adj[u].push_back(v);
+           adj[v].push_back(u);
+       }
+      vector<int>vis(V , 0);
+      for(int i=0;i<V;i++){ //this loop will be running as many components in the graph.
+          if(!vis[i]){
+               if(dfs(i , -1 , adj , vis) == true){
+                   return true;
+               }
+          }
+      }
+      return false;
+   }
+};
+//t.c.= O(N + 2E)
+//s.c. = O(N) + O(N) => O(N), recursion stack and visited array and adjacency list too.
