@@ -1,0 +1,37 @@
+class Solution{
+    private:
+    bool dfs(int start , int col , vector<vector<int>>&adj , vector<int>&color){
+        color[start] = col;
+        for(auto it : adj[start]){
+            if(color[it] == -1){
+                if(dfs(it , !col , adj , color)== false){
+                    return false;
+                }
+            }else if(color[it] == color[start]){
+                return false;
+            }
+        }
+        return true;
+    }
+    public:
+    bool isBipartite(int V , vector<vector<int>>&edges){
+        vector<vector<int>>adj(V);
+        for(auto edge : edges){
+            int u = edge[0];
+            int v = edge[1];
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        vector<int>color(V , -1);
+        for(int i=0;i<V;i++){
+            if(color[i] == -1){
+                if(dfs(i , 0 , adj , color) == false){
+                    return false;
+                }
+            }
+        }
+    return true;
+    }
+};
+//t.c. = O(V+2E)
+//s.c. = O(v)
