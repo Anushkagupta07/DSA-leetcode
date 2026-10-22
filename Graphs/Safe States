@@ -1,0 +1,42 @@
+class Solution {
+  public:
+    vector<int> safeNodes(int V, vector<vector<int>>& edges) {
+        // Code here
+        vector<vector<int>>adj(V); //O(V+E)
+        for(auto edge : edges){
+            int u = edge[0];
+            int v = edge[1];
+            adj[u].push_back(v);
+        }
+        vector<vector<int>>adjRev(V); //O(V+E)
+        vector<int>indegree(V,0); //O(V)
+        for(int i=0;i<V;i++){
+            for(auto it : adj[i]){
+                adjRev[it].push_back(i);
+                indegree[i]++; 
+            }
+        }
+        queue<int>q; //O(V)
+        vector<int>safeNodes; //output array      //O(V)
+        for(int i=0;i<V;i++){
+            if(indegree[i] == 0){
+                q.push(i);
+            }
+        }
+        while(!q.empty()){
+            int node = q.front();
+            q.pop();
+            safeNodes.push_back(node);
+            for(auto it : adjRev[node]){
+                indegree[it]--;
+                if(indegree[it] == 0){
+                    q.push(it);
+                }
+            }
+        }
+        sort(safeNodes.begin() , safeNodes.end());
+        return safeNodes;
+    }
+};
+//t.c. = O(VlogV + V + E)
+//s.c. = O(V + E)
