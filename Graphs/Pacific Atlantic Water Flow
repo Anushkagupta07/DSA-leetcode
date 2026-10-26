@@ -1,0 +1,51 @@
+class Solution {
+private:
+    void dfs(int row , int col , vector<vector<int>>&heights , vector<vector<int>>&vis){
+        int m = heights.size();
+        int n = heights[0].size();
+        vis[row][col] = 1;
+        int delrow[] = {-1 , 0 , +1 , 0};
+        int delcol[] = {0 , +1 , 0 , -1};
+        for(int i=0;i<4;i++){
+            int nrow = row + delrow[i];
+            int ncol = col + delcol[i];
+            if(nrow >= 0 && nrow < m && ncol >= 0 && ncol < n && !vis[nrow][ncol] && heights[nrow][ncol] >= heights[row][col]){
+                dfs(nrow , ncol , heights , vis);
+            }
+        }
+    }
+public:
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+    int m = heights.size();
+    int n = heights[0].size();
+    vector<vector<int>>ans;
+    vector<vector<int>>pacific(m , vector<int>(n,0));
+    vector<vector<int>>atlantic(m , vector<int>(n,0));
+    //pacific -> top boundary
+    for(int j=0;j<n;j++){
+        dfs(0 , j , heights , pacific);
+    }   
+    //pacific -> left boundary
+    for(int i=0;i<m;i++){
+        dfs(i , 0 , heights , pacific);
+    }
+    //atlantic -> bottom boundary
+    for(int j=0;j<n;j++){
+        dfs(m-1 , j , heights , atlantic);
+    }
+    //atlantic -> right boundary
+    for(int i=0;i<m;i++){
+        dfs(i , n-1 , heights , atlantic);
+    }
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            if(pacific[i][j] && atlantic[i][j]){
+                ans.push_back({i,j});
+            }
+        }
+    }
+    return ans;
+    }
+};
+//t.c. = O(m*n)
+//s.c. = O(m*n)
