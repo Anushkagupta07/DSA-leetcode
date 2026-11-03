@@ -1,0 +1,19 @@
+class Solution {
+  private:
+    bool solve(Node* root , long long minval , long long maxval){
+      if(root == NULL) return true;
+      if(root->data <= minval || root->data >= maxval){
+          return false;
+      }
+      bool lh = solve(root->left , minval , root->data);
+      bool rh = solve(root->right , root->data , maxval);
+      return lh && rh;
+    }
+  public:
+    bool isBST(Node* root) {
+        // code here
+    return solve(root , LLONG_MIN , LLONG_MAX);
+    }
+};
+//t.c. = O(n)
+//s.c. = O(h), recursion stack
