@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int numComponents(ListNode* head, vector<int>& nums) {
+    unordered_set<int>s(nums.begin(), nums.end());
+    ListNode* curr = head;
+    int count = 0;
+    while(curr != NULL){
+        if(s.find(curr->val) != s.end()){
+            count+=1;
+            while(curr != NULL && s.find(curr->val) != s.end()){
+                curr = curr->next;
+            }
+        }else{
+        curr = curr->next;
+        }
+    }
+    return count;
+    }
+};
+//t.c. = O(number of nodes in linked list)
+//s.c. = O(number of elements in nums)
